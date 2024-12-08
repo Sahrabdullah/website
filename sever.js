@@ -54,3 +54,20 @@ server.get(`/cars`, (req, res) =>
     })
 })
 
+//SEARCH CAR BY ID 
+server.get(`/cars/:id`, (req, res) => 
+{ //route params
+    const car = `SELECT * FROM CARS WHERE ID =${req.params.id}`
+    db.get(car, (err, rows) => {
+        if (err) { //send the error
+            console.log(err)
+            return res.send(err)
+        }
+        else if (!rows) {  //not found id
+            return res.status(404).send(`THE CAR WITH ID ${req.params.id} IS NOT FOUND`) //404 not found
+        }
+        else //successful 
+            return res.json(rows)
+    })
+})
+
