@@ -40,3 +40,17 @@ server.post(`/user/login`, (req, res) =>
     })
 })
 
+//GET ALL CARS
+server.get(`/cars`, (req, res) => 
+{ //req body
+    const car = `SELECT * FROM CARS`
+    db.all(car, (err, rows) => {
+        if (err) {
+            console.log(err)
+            return res.send(err)
+        }
+        else
+            return res.json(rows)
+    })
+})
+
