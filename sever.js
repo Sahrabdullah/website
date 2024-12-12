@@ -103,3 +103,17 @@ server.post(`/cars/addcars`, (req, res) => {
 })
 
 //DELETE CARS
+//ROUTE PARAMS
+//-- ADMIN
+server.delete(`/cars/deletecar/:id`, (req, res) => {
+    const car = `DELETE FROM CARS WHERE ID = ${req.params.id}`
+    db.run(car, (err) => {
+        if (err) {
+            console.log(err)
+            return res.send(err)
+        }
+        else
+            return res.json(`Car with the id ${req.params.id} is deleted`)
+    })
+})
+
