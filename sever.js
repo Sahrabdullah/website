@@ -38,6 +38,21 @@ server.post(`/user/login`, (req, res) => { //req body
     })
 })
 
+//DELETE USER
+server.delete(`/user/delete/:id`,(req,res)=>{
+     const user = `DELETE FROM USERS WHERE ID = ${req.params.id}`
+     db.run(user, (err) => {
+        if (err) {
+            console.log(err)
+            return res.send(err)
+        }
+        else
+            return res.json(`The user with the id ${req.params.id} is deleted`)
+    })
+})
+
+
+
 //GET ALL CARS
 server.get(`/cars`, (req, res) => { //req body
     const car = `SELECT * FROM CARS`
