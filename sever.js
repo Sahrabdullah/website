@@ -136,3 +136,20 @@ server.put(`/cars/edit/:id`, (req, res) => {
     })
 })
 
+// ADD REVIEW
+/////////////////////////////////////////////////////////////////////DOC HOW TO SAY TO GET FROM DATABASE
+server.post(`/addreview`, (req, res) => {
+    const user_id = req.users.id
+    const review = req.body.review
+
+    const reviews = `INSERT INTO REVIEWS (USER_ID,REVIEW) VALUES (${user_id}, '${review}')`
+    db.run(reviews, (err) => {
+        if (err) {
+            console.log(err)
+            return res.send(err)
+        }
+        else
+            return res.json(`Thank You For Your Review`)
+    })
+})
+
