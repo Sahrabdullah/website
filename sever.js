@@ -191,3 +191,15 @@ server.delete(`/delete/book/:id`,(req,res)=>{
            return res.json(`The user with the id ${req.params.id} is deleted`)
    })
 })
+server.listen(port, (error) => {
+    if (error) {
+        console.log(`The server did not start:`, error)
+        return
+    }
+    console.log(`The server is listing to port ${port}`)
+    db.serialize(() => {
+        db.exec(db_access.create_users_table)
+        db.exec(db_access.create_user_booking_table)
+        db.exec(db_access.create_feedback_table)
+        db.exec(db_access.create_cars_table)
+    })
