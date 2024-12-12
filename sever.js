@@ -6,8 +6,7 @@ const port = 127
 server.use(express.json()) //instead of using body parser
 
 //REGISTERATION
-server.post(`/user/register`, (req, res) => 
-{ //req body
+server.post(`/user/register`, (req, res) => { //req body
     const name = req.body.name
     const email = req.body.email
     const password = req.body.password
@@ -17,17 +16,16 @@ server.post(`/user/register`, (req, res) =>
     db.run(content, (err) => {
         if (err) {
             console.log(err.message)
-            return res.status(401).send
+            return res.status(401).send     //401 is unauthorized user
         }
         else
-            return res.status(200).send(`Registered Successfully`)
+            return res.status(200).send(`Registered Successfully`)      //20 is OK
     })
 })
 
 
 //LOGIN
-server.post(`/user/login`, (req, res) => 
-{ //req body
+server.post(`/user/login`, (req, res) => { //req body
     // const name = req.body.name
     const email = req.body.email
     const password = req.body.password
@@ -41,8 +39,7 @@ server.post(`/user/login`, (req, res) =>
 })
 
 //GET ALL CARS
-server.get(`/cars`, (req, res) => 
-{ //req body
+server.get(`/cars`, (req, res) => { //req body
     const car = `SELECT * FROM CARS`
     db.all(car, (err, rows) => {
         if (err) {
@@ -55,8 +52,8 @@ server.get(`/cars`, (req, res) =>
 })
 
 //SEARCH CAR BY ID 
-server.get(`/cars/:id`, (req, res) => 
-{ //route params
+//ROUTE PARAMS
+server.get(`/cars/:id`, (req, res) => { //route params
     const car = `SELECT * FROM CARS WHERE ID =${req.params.id}`
     db.get(car, (err, rows) => {
         if (err) { //send the error
