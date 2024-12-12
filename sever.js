@@ -83,3 +83,23 @@ server.get(`/cars/:id`, (req, res) => { //route params
     })
 })
 
+//ADD CARS
+server.post(`/cars/addcars`, (req, res) => {
+    const brand = req.body.brand
+    const model = req.body.model
+    const km = req.body.km
+    const price = req.body.price
+    const email = req.body.email
+    let cars = `INSERT INTO CARS (BRAND,MODEL,KM,min,max,email)
+        VALUES('${brand}','${model}','${km}',${price},'${email}') `
+    db.run(cars, (err) => {
+        if (err) {
+            console.log(err)
+            return res.send(err)
+        }
+        else
+            return res.json(`car added successfully`)
+    })
+})
+
+//DELETE CARS
