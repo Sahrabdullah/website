@@ -153,3 +153,17 @@ server.post(`/addreview`, (req, res) => {
     })
 })
 
+//DELETE REVIEW
+// -- ADMIN
+server.delete(`/deletereview/:id`, (req, res) => {
+    const car = `DELETE FROM REVIEWS WHERE ID = ${req.params.id}`
+    db.run(car, (err) => {
+        if (err) {
+            console.log(err)
+            return res.send(err)
+        }
+        else
+            return res.json(`Review with the id ${req.params.id} is deleted`)
+    })
+})
+
