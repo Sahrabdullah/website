@@ -178,3 +178,16 @@ server.get(`/booking`,(req, res) => {
             return res.json(rows)
     })
 })
+
+
+server.delete(`/delete/book/:id`,(req,res)=>{
+    const books = `DELETE FROM BOOKING WHERE ID = ${req.params.id}`
+    db.run(books, (err) => {
+       if (err) {
+           console.log(err)
+           return res.send(err)
+       }
+       else
+           return res.json(`The user with the id ${req.params.id} is deleted`)
+   })
+})
