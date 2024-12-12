@@ -167,3 +167,14 @@ server.delete(`/deletereview/:id`, (req, res) => {
     })
 })
 
+server.get(`/booking`,(req, res) => {
+    const bookings = `SELECT * FROM BOOKING`
+    db.all(bookings, (err, rows) => {
+        if (err) {
+            console.log(err)
+            return res.send(err)
+        }
+        else
+            return res.json(rows)
+    })
+})
