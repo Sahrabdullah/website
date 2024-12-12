@@ -117,3 +117,22 @@ server.delete(`/cars/deletecar/:id`, (req, res) => {
     })
 })
 
+//EDIT CAR
+// -- ADMIN
+server.put(`/cars/edit/:id`, (req, res) => {
+    const brand = req.body.brand
+    const model = req.body.model
+    const price = req.body.price
+    const km = req.body.km
+
+    const query = `UPDATE CARS SET BRAND= '${brand}',MODEL= '${model}',PRICE= ${price},KM= '${km}' WHERE ID= ${req.params.id}`
+    db.run(query, (err) => {
+        if (err) {
+            console.log(err)
+            return res.send(err)
+        }
+        else
+            return res.json(`Car with the id ${req.params.id} is updated successfully`)
+    })
+})
+
